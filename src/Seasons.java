@@ -2,67 +2,65 @@ import java.util.Arrays;
 
 public enum Seasons {
 
-    SPRING("wiosna"),
-    SUMMER("lato"),
-    AUTUMN("jesień"),
-    WINTER("zima");
-
-    private static final String[] monthForSpring = {"marzec", "kwiecień", "maj"};
-    private static final String[] monthForSummer = {"czerwiec", "lipiec", "sierpień"};
-    private static final String[] monthForAutumn = {"wrzesień", "październik", "listopad"};
-    private static final String[] monthForWinter = {"grudzień", "styczeń", "luty"};
+    SPRING("wiosna", new String[]{"marzec", "kwiecień", "maj"}),
+    SUMMER("lato", new String[]{"czerwiec", "lipiec", "sierpień"}),
+    AUTUMN("jesień", new String[]{"wrzesień", "październik", "listopad"}),
+    WINTER("zima", new String[]{"grudzień", "styczeń", "luty"});
 
     private String descriptionPL;
+    private String[] months;
 
-    Seasons(String descriptionPL) {
+    Seasons(String descriptionPL, String[] months) {
         this.descriptionPL = descriptionPL;
+        this.months = months;
     }
 
-    static void showInfo(){
+    static void showInfo() {
         System.out.println("Wpisz porę roku:");
         System.out.println("wiosna lato jesień zima");
     }
 
-    static void showSeasonAndMonths(String seasons) {
+    static void showSeasonAndMonths(String season) {
 
-        Seasons season = convertTo(seasons);
-        switch (season) {
+        Seasons convertSeason = convertTo(season);
+        switch (convertSeason) {
             case SPRING -> {
                 System.out.println(SPRING.name());
-                showMonths(SPRING);
+                printMonths(SPRING);
             }
             case SUMMER -> {
                 System.out.println(SUMMER.name());
-                showMonths(SUMMER);
+                printMonths(SUMMER);
             }
             case AUTUMN -> {
                 System.out.println(AUTUMN.name());
-                showMonths(AUTUMN);
+                printMonths(AUTUMN);
             }
             case WINTER -> {
                 System.out.println(WINTER.name());
-                showMonths(WINTER);
+                printMonths(WINTER);
             }
-
         }
     }
 
-    private static Seasons convertTo(String seasons) {
-        for(Seasons s: Seasons.values()){
-            if (s.descriptionPL.equalsIgnoreCase(seasons))
+    private static Seasons convertTo(String season) {
+        for (Seasons s : Seasons.values()) {
+            if (s.descriptionPL.equalsIgnoreCase(season))
                 return s;
         }
         throw new NullPointerException("Nie ma takiej pory roku");
     }
 
-    private static void showMonths(Seasons seasons) {
-        switch (seasons) {
-            case SPRING -> System.out.println(Arrays.toString(monthForSpring));
-            case SUMMER -> System.out.println(Arrays.toString(monthForSummer));
-            case AUTUMN -> System.out.println(Arrays.toString(monthForAutumn));
-            case WINTER -> System.out.println(Arrays.toString(monthForWinter));
+    private static void printMonths(Seasons season) {
+        Seasons[] seasons = values();
+        for (Seasons s : seasons) {
+            if (s == season) {
+                StringBuilder sb = new StringBuilder();
+                sb.append("Miesiące pory roku: ");
+                sb.append(s.descriptionPL + " to: ");
+                sb.append(Arrays.toString(s.months));
+                System.out.println(sb.toString());
+            }
         }
     }
-
-
 }
