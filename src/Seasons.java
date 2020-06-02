@@ -23,32 +23,16 @@ public enum Seasons {
     static void showSeasonAndMonths(String season) {
 
         Seasons convertSeason = convertTo(season);
-        switch (convertSeason) {
-            case SPRING -> {
-                System.out.println(SPRING.name());
-                printMonths(SPRING);
-            }
-            case SUMMER -> {
-                System.out.println(SUMMER.name());
-                printMonths(SUMMER);
-            }
-            case AUTUMN -> {
-                System.out.println(AUTUMN.name());
-                printMonths(AUTUMN);
-            }
-            case WINTER -> {
-                System.out.println(WINTER.name());
-                printMonths(WINTER);
-            }
-        }
+        System.out.println(convertTo(season));
+        printMonths(convertSeason);
     }
 
-    private static Seasons convertTo(String season) {
-        for (Seasons s : Seasons.values()) {
-            if (s.descriptionPL.equalsIgnoreCase(season))
-                return s;
+    private static Seasons convertTo(String polishDescription) {
+        for (Seasons season : Seasons.values()) {
+            if (season.descriptionPL.equalsIgnoreCase(polishDescription))
+                return season;
         }
-        throw new NullPointerException("Nie ma takiej pory roku");
+        throw new IllegalArgumentException("Nie ma takiej pory roku");
     }
 
     private static void printMonths(Seasons season) {

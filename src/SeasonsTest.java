@@ -7,8 +7,16 @@ public class SeasonsTest {
 
         Seasons.showInfo();
         Scanner scanner = new Scanner(System.in);
-        String inputSeason = scanner.nextLine();
-        Seasons.showSeasonAndMonths(inputSeason);
+        boolean err = true;
+        while (err) {
+            try {
+                String inputSeason = scanner.nextLine();
+                Seasons.showSeasonAndMonths(inputSeason);
+                err = false;
+            } catch (IllegalArgumentException e) {
+                System.out.println("Nie ma takiej pory roku. Spróbuj jeszcze raz");
+            }
+        }
         scanner.close();
 
 
