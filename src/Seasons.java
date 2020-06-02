@@ -15,13 +15,7 @@ public enum Seasons {
         this.months = months;
     }
 
-    static void showInfo() {
-        System.out.println("Wpisz porę roku:");
-        System.out.println("wiosna lato jesień zima");
-    }
-
     static void showSeasonAndMonths(String season) {
-
         Seasons convertSeason = convertTo(season);
         System.out.println(convertTo(season));
         printMonths(convertSeason);
@@ -36,15 +30,9 @@ public enum Seasons {
     }
 
     private static void printMonths(Seasons season) {
-        Seasons[] seasons = values();
-        for (Seasons s : seasons) {
-            if (s == season) {
-                StringBuilder sb = new StringBuilder();
-                sb.append("Miesiące pory roku: ");
-                sb.append(s.descriptionPL + " to: ");
-                sb.append(Arrays.toString(s.months));
-                System.out.println(sb.toString());
-            }
-        }
+        StringBuilder sb = new StringBuilder();
+        System.out.println("Miesiące pory roku: " + season.descriptionPL);
+        System.out.println("to: " + Arrays.toString(season.months));
+
     }
 }

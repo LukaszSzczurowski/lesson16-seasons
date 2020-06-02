@@ -5,7 +5,7 @@ public class SeasonsTest {
 
     public static void main(String[] args) {
 
-        Seasons.showInfo();
+        UserInputUtils.showInfo();
         Scanner scanner = new Scanner(System.in);
         boolean err = true;
         while (err) {
